@@ -1,0 +1,11 @@
+name: 'Github Actions Typescript Template'
+description: 'A '
+author: 'Typescript Github Actions Boilerplate template'
+inputs:
+  milliseconds:
+    required: true
+    description: 'Enter the number of milliseconds'
+    default: 500
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
