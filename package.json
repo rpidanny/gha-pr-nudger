@@ -25,7 +25,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run build && npm run package",
+      "pre-commit": "lint-staged && npm run build && npm run package && git add ./dist",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-push": "npm run lint"
     }

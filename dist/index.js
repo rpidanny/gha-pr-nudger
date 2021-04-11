@@ -256,7 +256,7 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
         else {
             body = this.defaultBody.replace(/{days}/g, `${days}`);
         }
-        return `${body}\n${this.footer}`;
+        return `${body}\n\n${this.footer}`;
     }
     async upsertComment(pr, commentBody) {
         let commentId;
