@@ -234,6 +234,9 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
         this.logger.info(`Found ${prs.length} open prs`);
         return prs;
     }
+    logPullRequests(prs) {
+        prs.forEach(pr => this.logger.info(`Found PR: ${pr.number} - ${pr.age} days`));
+    }
     filterPullRequests(prs) {
         return prs.filter(pr => {
             var _a;
@@ -303,6 +306,7 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
     }
     async run() {
         let prs = await this.getOpenPullRequests();
+        this.logPullRequests(prs);
         prs = this.filterPullRequests(prs);
         this.logger.info(`Nudging ${prs.length} PRs`);
         const promises = prs.map(pr => this.nudge(pr));
