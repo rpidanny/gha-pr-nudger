@@ -57,6 +57,12 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
     return prs
   }
 
+  logPullRequests(prs: Array<IPullRequest>): void {
+    prs.forEach(pr =>
+      this.logger.info(`Found PR: ${pr.number} - ${pr.age} days`),
+    )
+  }
+
   filterPullRequests(prs: Array<IPullRequest>): Array<IPullRequest> {
     return prs.filter(
       pr =>
@@ -150,6 +156,8 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
 
   async run(): Promise<void> {
     let prs = await this.getOpenPullRequests()
+
+    this.logPullRequests(prs)
 
     prs = this.filterPullRequests(prs)
 
