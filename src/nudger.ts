@@ -28,12 +28,18 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
     this.github = dependency.github
     this.logger = dependency.logger
 
-    this.logger.info(`Nudger Configs:`)
-    this.logger.info(`Owner: ${config.owner}`)
-    this.logger.info(`Repo: ${config.repo}`)
-    this.logger.info(`Threshold: ${config.threshold}`)
-    this.logger.info(`Include Dependabot: ${config.includeDependabot}`)
-    this.logger.info(`Message: ${config.message}`)
+    this.printConfigs()
+  }
+
+  printConfigs(): void {
+    this.logger.info('Nudger Configs!')
+    this.logger.info(`Config/Owner: ${this.config.owner}`)
+    this.logger.info(`Config/Repo: ${this.config.repo}`)
+    this.logger.info(`Config/Threshold: ${this.config.threshold}`)
+    this.logger.info(
+      `Config/Include Dependabot: ${this.config.includeDependabot}`,
+    )
+    this.logger.info(`Config/Message: ${this.config.message}`)
   }
 
   getDays(date1: Date, date2: Date): number {
@@ -58,9 +64,7 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
   }
 
   logPullRequests(prs: Array<IPullRequest>): void {
-    prs.forEach(pr =>
-      this.logger.info(`Found PR: ${pr.number} - ${pr.age} days`),
-    )
+    prs.forEach(pr => this.logger.info(`#${pr.number} - ${pr.age} days old`))
   }
 
   filterPullRequests(prs: Array<IPullRequest>): Array<IPullRequest> {
