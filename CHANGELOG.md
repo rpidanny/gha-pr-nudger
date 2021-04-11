@@ -1,3 +1,10 @@
+## 1.0.0 (2021-04-11)
+
+
+### Features
+
+* initial implementation ([#6](https://github.com/rpidanny/gha-pr-nudger/issues/6)) ([959f33d](https://github.com/rpidanny/gha-pr-nudger/commit/959f33d001b2bd48c3f30747335737f2dca3c4e1))
+
 ## 1.0.0 (2021-04-09)
 
 
