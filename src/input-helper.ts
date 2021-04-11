@@ -4,7 +4,7 @@ import * as github from '@actions/github'
 import {IConfig} from './types'
 
 const defaultMessage = `
-Hey there :wave:, this PR has been open for **{days}** days.
+Hey there :wave:, this PR has been open for **{days}** day(s).
 
 In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short-lived-feature-branches/), let's get this merged soon :rocket:
 `

@@ -41,7 +41,7 @@ The core idea is that we should not enforce a strict rule but just [nudge](https
     # The message can be a template where {days} can be used
     # to dynamically set the age of the PR
     # Default:
-    #  Hey there :wave:, this PR has been open for **{days}** days.
+    #  Hey there :wave:, this PR has been open for **{days}** day(s).
     #
     #  In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short-lived-feature-branches/), let's get this merged soon :rocket:
     message: ''
