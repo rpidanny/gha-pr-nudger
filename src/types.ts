@@ -2,7 +2,7 @@ export interface IConfig {
   owner: string
   repo: string
   authToken: string
-  threshold: number
+  days: number
   includeDependabot: boolean
-  message?: string
+  message: string
 }

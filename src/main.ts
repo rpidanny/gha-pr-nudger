@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 
 import {Nudger} from './nudger'
-import {GitHub} from './externals/github'
-import {Logger} from './utils/logger'
+import {GitHub} from './github'
+import {Logger} from './logger'
 
 import {getInputs} from './input-helper'
 
@@ -18,7 +18,7 @@ async function run(): Promise<void> {
       {
         owner: config.owner,
         repo: config.repo,
-        threshold: config.threshold,
+        days: config.days,
         includeDependabot: config.includeDependabot,
         message: config.message,
       },

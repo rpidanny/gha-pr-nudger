@@ -1,5 +1,5 @@
-import {IGitHub, IPullRequest} from './externals/github'
-import {ILogger} from './utils/logger'
+import {IGitHub, IPullRequest} from './github'
+import {ILogger} from './logger'
 
 interface Dependency {
   github: IGitHub
@@ -9,20 +9,15 @@ interface Dependency {
 interface Config {
   repo: string
   owner: string
-  threshold: number
+  days: number
   includeDependabot: boolean
-  message?: string
+  message: string
 }
 
 export class Nudger {
   private github!: IGitHub
   private logger!: ILogger
   private footer = `Your [pr-nudger](https://github.com/rpidanny/gha-pr-nudger) bot :robot:`
-  private defaultBody = `
-Hey there :wave:, this PR has been open for **{days}** days.
-
-In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short-lived-feature-branches/), let's get this merged soon :rocket:
-`
 
   constructor(private config: Config, dependency: Dependency) {
     this.github = dependency.github
@@ -35,7 +30,7 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
     this.logger.info('Nudger Configs!')
     this.logger.info(`Config/Owner: ${this.config.owner}`)
     this.logger.info(`Config/Repo: ${this.config.repo}`)
-    this.logger.info(`Config/Threshold: ${this.config.threshold}`)
+    this.logger.info(`Config/Days: ${this.config.days}`)
     this.logger.info(
       `Config/Include Dependabot: ${this.config.includeDependabot}`,
     )
@@ -70,19 +65,14 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
   filterPullRequests(prs: Array<IPullRequest>): Array<IPullRequest> {
     return prs.filter(
       pr =>
-        pr.age >= this.config.threshold &&
+        pr.age >= this.config.days &&
         (this.config.includeDependabot ||
           pr?.user?.login !== 'dependabot[bot]'),
     )
   }
 
   createCommentBody(days: number): string {
-    let body
-    if (this.config.message) {
-      body = this.config.message.replace(/{days}/g, `${days}`)
-    } else {
-      body = this.defaultBody.replace(/{days}/g, `${days}`)
-    }
+    const body = this.config.message.replace(/{days}/g, `${days}`)
     return `${body}\n\n${this.footer}`
   }
 
