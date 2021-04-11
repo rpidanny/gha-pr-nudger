@@ -1,5 +1,5 @@
 name: 'PR Nudger'
-description: 'This action nudges the PR participants to get the PR merged by commenting a reminder message on PRs that are older than `x` number of days.'
+description: 'This action nudges the PR participants to get the PR merged by commenting a reminder message on PRs.'
 inputs:
   repository:
     description: 'Repository name with owner. For example, actions/checkout'
