@@ -213,6 +213,12 @@ In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short
 `;
         this.github = dependency.github;
         this.logger = dependency.logger;
+        this.logger.info(`Nudger Configs:`);
+        this.logger.info(`Owner: ${config.owner}`);
+        this.logger.info(`Repo: ${config.repo}`);
+        this.logger.info(`Threshold: ${config.threshold}`);
+        this.logger.info(`Include Dependabot: ${config.includeDependabot}`);
+        this.logger.info(`Message: ${config.message}`);
     }
     getDays(date1, date2) {
         const diff = date1.getTime() - date2.getTime();
