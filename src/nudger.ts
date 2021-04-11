@@ -37,12 +37,6 @@ export class Nudger {
     this.logger.info(`Config/Message: ${this.config.message}`)
   }
 
-  getDays(date1: Date, date2: Date): number {
-    const diff = date1.getTime() - date2.getTime()
-
-    return diff / (1000 * 3600 * 24)
-  }
-
   async getOpenPullRequests(): Promise<Array<IPullRequest>> {
     this.logger.info(
       `Getting open pull requests on ${this.config.owner}/${this.config.repo}`,
@@ -66,8 +60,7 @@ export class Nudger {
     return prs.filter(
       pr =>
         pr.age >= this.config.days &&
-        (this.config.includeDependabot ||
-          pr?.user?.login !== 'dependabot[bot]'),
+        (this.config.includeDependabot || pr.user?.login !== 'dependabot[bot]'),
     )
   }
 
@@ -81,7 +74,6 @@ export class Nudger {
     try {
       commentId = await this.getCommentIdIfExists(pr)
     } catch (err) {
-      console.log('Failed to get comment id')
       this.logger.error(
         `Failed to get comment id on ${this.config.owner}/${this.config.repo} #${pr.number}`,
         err,
