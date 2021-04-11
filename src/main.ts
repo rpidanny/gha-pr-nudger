@@ -1,16 +1,34 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+
+import {Nudger} from './nudger'
+import {GitHub} from './github'
+import {Logger} from './logger'
+
+import {getInputs} from './input-helper'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+    const config = getInputs()
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    // Init dependencies
+    const logger = new Logger()
+    const github = new GitHub(config.authToken)
 
-    core.setOutput('time', new Date().toTimeString())
+    const nudger = new Nudger(
+      {
+        owner: config.owner,
+        repo: config.repo,
+        days: config.days,
+        includeDependabot: config.includeDependabot,
+        message: config.message,
+      },
+      {
+        github,
+        logger,
+      },
+    )
+
+    await nudger.run()
   } catch (error) {
     core.setFailed(error.message)
   }

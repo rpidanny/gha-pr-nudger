@@ -1,31 +1,35 @@
 {
-  "name": "github-actions-typescript-template",
-  "version": "1.0.0",
+  "name": "gha-pr-nudger",
+  "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
-  "main": "lib/main.js",
+  "description": "This action nudges the PR participants to get the PR merged by commenting a reminder message on PRs that are older than `x` number of days.",
+  "main": "dist/index.js",
   "scripts": {
     "build": "./node_modules/typescript/bin/tsc -p ./tsconfig.build.json",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest",
+    "test": "jest ./__tests__",
+    "test:watch": "jest --watch ./__tests__",
+    "test:watch:test": "jest --watch ./__tests__/unit/nudger.spec.ts",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test",
     "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rpidanny/github-actions-typescript-template.git"
+    "url": "git+https://github.com/rpidanny/gha-pr-nudger.git"
   },
   "keywords": [
     "actions",
+    "github-actions",
     "node",
-    "setup"
+    "nudge",
+    "short-lived-branches"
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "lint-staged && npm run build && npm run package && git add ./dist",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-push": "npm run lint"
     }
@@ -38,7 +42,9 @@
   "author": "Abhishek Maharjan",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "@octokit/rest": "^18.5.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
@@ -56,10 +62,12 @@
     "eslint": "^7.17.0",
     "eslint-plugin-github": "^4.1.1",
     "eslint-plugin-jest": "^24.1.3",
-    "husky": "^6.0.0",
+    "husky": "^1.3.1",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",
+    "jest-mock-extended": "^1.0.13",
     "js-yaml": "^3.14.0",
+    "lint-staged": "^10.5.4",
     "prettier": "2.2.1",
     "semantic-release": "^17.4.2",
     "ts-jest": "^26.4.4",

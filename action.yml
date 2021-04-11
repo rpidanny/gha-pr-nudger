@@ -1,11 +1,33 @@
-name: 'Github Actions Typescript Template'
-description: 'A '
-author: 'Typescript Github Actions Boilerplate template'
+name: 'PR Nudger'
+description: 'This action nudges the PR participants to get the PR merged by commenting a reminder message on PRs that are older than `x` number of days.'
 inputs:
-  milliseconds:
+  repository:
+    description: 'Repository name with owner. For example, actions/checkout'
+    default: ${{ github.repository }}
+  token:
+    description: >
+      Personal access token (PAT) used to fetch the repository. The PAT is configured
+      with the local git config, which enables your scripts to run authenticated git
+      commands. The post-job step removes the PAT.
+      We recommend using a service account with the least permissions necessary.
+      Also when generating a new PAT, select the least scopes necessary.
+      [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+    default: ${{ github.token }}
+  days:
     required: true
-    description: 'Enter the number of milliseconds'
-    default: 500
+    description: 'Enter the number of days after which nudging should begin'
+    default: 2
+  includeDependabot:
+    required: false
+    description: 'Include dependabot PRs?'
+    default: true
+  message:
+    required: false
+    description: 'The message to post to nudge the PR'
+    default: >
+      Hey there :wave:, this PR has been open for **{days}** day(s).
+
+      In the spirit for [short lived branches](https://trunkbaseddevelopment.com/short-lived-feature-branches/), let's get this merged soon :rocket:
 runs:
   using: 'node12'
   main: 'dist/index.js'
