@@ -1,3 +1,10 @@
+### [1.0.1](https://github.com/rpidanny/gha-pr-nudger/compare/v1.0.0...v1.0.1) (2021-04-12)
+
+
+### Bug Fixes
+
+* readme docs ([b02707b](https://github.com/rpidanny/gha-pr-nudger/commit/b02707bfcc473c5d9bc0cd58a0454b1823411eb4))
+
 ## 1.0.0 (2021-04-11)
 
 
