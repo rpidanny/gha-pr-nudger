@@ -14,7 +14,7 @@ The core idea is that we should not enforce a strict rule but just [nudge](https
 
 <!-- start usage -->
 ```yaml
-- uses: rpidanny/gha-pr-nudger@v2
+- uses: rpidanny/gha-pr-nudger@v1
   with:
     # Repository name with owner. For example, actions/checkout
     # Default: ${{ github.repository }}
