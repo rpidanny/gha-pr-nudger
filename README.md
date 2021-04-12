@@ -16,18 +16,11 @@ The core idea is that we should not enforce a strict rule but just [nudge](https
 ```yaml
 - uses: rpidanny/gha-pr-nudger@v1
   with:
-    # Repository name with owner. For example, actions/checkout
+    # Repository name with owner. For example, rpidanny/gha-pr-nudger
     # Default: ${{ github.repository }}
     repository: ''
 
-    # Personal access token (PAT) used to fetch the repository. The PAT is configured
-    # with the local git config, which enables your scripts to run authenticated git
-    # commands. The post-job step removes the PAT.
-    #
-    # We recommend using a service account with the least permissions necessary. Also
-    # when generating a new PAT, select the least scopes necessary.
-    #
-    # [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+    # Personal access token (PAT) used to call GitHub APIs
     #
     # Default: ${{ github.token }}
     token: ''
