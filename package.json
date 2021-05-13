@@ -47,7 +47,7 @@
     "@octokit/rest": "^18.5.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.1",
+    "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.1",
     "@rpidanny/eslint-config-typescript": "^1.0.1",
     "@semantic-release/changelog": "^5.0.1",
